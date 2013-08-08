@@ -1,0 +1,242 @@
+ul.songs li {
+    list-style:none;
+    margin-left:-.75em;
+}
+
+div.formo {
+    text-align: left;
+    width: 80%;
+    padding: 0;
+    margin-left: 26%;
+    margin-top: 2em;
+}
+
+div.form-header,div.form-header2 {
+    background-image:url(/images/form/wedding-form-top.png);
+    background-repeat:no-repeat;
+    padding-top:5px;
+    padding-left:85px;
+    width:375px;
+}
+
+div.form-header {
+    /*height: 3em !important;*/
+    padding-left:135px;
+    color:#606060;
+}
+
+div.form-header2 {
+    padding-left:105px;
+    color:#606060;
+}
+
+div.form-header p, div.form-header2 p {
+    font-family:"Times New Roman";
+    font-style:10px;
+    color:#606060;
+    font-weight:100;
+    padding-top: 10px;
+    padding-left: 11px;
+}
+
+::-webkit-input-placeholder {
+    color:#606060;
+}
+
+:-moz-placeholder {
+    color:#606060;
+}
+
+::-moz-placeholder {
+    color:#606060;
+}
+
+:-ms-input-placeholder {
+    color:#606060;
+}
+
+p a.deleteb {
+    margin-left: 3.25em;
+}
+
+div.divider {
+    background-image:url(/images/form/wedding-form-dividers.png);
+    background-repeat:no-repeat;
+    height:20px;
+    width:500px;
+    margin-left:28px;
+}
+
+div.divider2 {
+    background-image:url(/images/form/wedding-form-dividers.png);
+    background-repeat:no-repeat;
+    height:10px;
+    width:500px;
+    margin-left:28px;
+}
+
+input[type='text'] {
+    text-indent: 10px;
+}
+
+input[type=text],input[type=submit] {
+    background-color:#ddd;
+}
+
+input[type=text].artist, input[type=text].song {
+    /*margin-left: 3.5em;*/
+    margin-left:2.5em;
+    margin-bottom:1.5em;
+}
+
+
+input[type=text]:focus,input[type=radio]:focus,textarea:focus,select:focus {
+    background-color:#FFF;
+    outline:none;
+}
+
+input[type=text] {
+    width:395px;
+    height:27px;
+    border-width:.5px !important;
+    border-color:#ccc;
+}
+
+/*@-moz-document url-prefix() { */
+  /*input[type=text] {*/
+     /*border-collapse: collapse;*/
+  /*}*/
+  /**/
+  /*textarea { */
+	  /*margin-left: 2.35em !important;*/
+	  /*padding-right: 0 !important;*/
+  /*}*/
+/*}*/
+
+input[type=submit] {
+    width: 10%;
+    margin-left: 19%;
+    /*margin-top: 1em;*/
+    /*margin-bottom: 1em;*/
+    padding:7px 17px;
+    font-size:13px;
+    color:#3e4f7b;
+    border-radius:2px;
+    border-width:0;
+    background-color:#ddd;
+    font-family:"Times New Roman";
+    letter-spacing:1px;
+    box-shadow:0 2px 0 #AAA;
+    cursor:pointer;
+}
+
+input[type=submit]:hover {
+    box-shadow:0 1px 0 #AAA;
+}
+
+.fname {
+    margin-left:2.5em;
+    margin-bottom:1.5em;
+}
+
+ul.songs {
+    margin-top:0;
+}
+
+input.artist {
+    margin-bottom:.75em;
+}
+
+p a.addone {
+    margin-left:2.35em;
+}
+
+div.form-footer {
+    background-image: url(/images/form/wedding-form-bottom.png);
+    height:40px;
+    background-repeat:no-repeat;
+}
+
+form {
+    background-image:url(/images/form/wedding-form-middle-repeat-y.png);
+    background-repeat:repeat-y;
+    margin-top:-1em;
+}
+
+div.heado {
+    height:15px;
+    background-image:url(/images/form/wedding-form-middle-repeat-y.png);
+    background-repeat:repeat-y;
+}
+
+a.addone,a.addone:hover,a.deleteb {
+    text-decoration:none;
+    color:#3e4f7b;
+    font-size:12px;
+}
+
+li.inputartist {
+    margin:10px 0;
+}
+
+div.span6 {
+    width:460px;
+}
+
+textarea {
+    background-color:#DDD;
+    margin-left:2.75em;
+    margin-bottom:1em;
+    margin-top: 1em;
+    padding:10px 40px 10px 10px;
+}
+
+input[type=radio] {
+    /*margin-top:1.5em;*/
+    margin-left:2.75em;
+    margin-right: 1em;
+    margin-bottom:1.5em;
+}
+
+input[type="checkbox"] {
+margin:1em 1em 1em 2.75em;
+}
+
+span.checky {
+padding-left:0;
+font-size: 14px;
+}
+
+.formo span {
+color:#606060;
+font-size:14px !important;
+}
+
+select.choice,select.choice2 {
+margin-left:2.75em;
+width:398px;
+margin-top:1em;
+margin-bottom:.5em;
+padding:10px;
+-webkit-border-radius:2px;
+-moz-border-radius:2px;
+border-radius:2px;
+-webkit-appearance:none;
+-moz-appearance:none;
+appearance:none;
+cursor:pointer;
+background-color:#DDD;
+color:#606060;
+overflow:hidden;
+overflow:-moz-hidden-unscrollable;
+/*background:url(/images/form/dropdown-off.png) no-repeat right;*/
+}
+
+textarea.message {
+    width: 346px;
+}
+
+input.error, select.error {
+    border: solid 2px red;
+    border-width: 2px !important
+}

@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <h3>A new rsvp has be submitted:</h3>
+        <table>
+            <tr>
+                <th>Names</th>
+                <td>${rsvp.names}</td>
+            </tr>
+            <tr>
+                <th>Attending</th>
+                <td>${rsvp.attending}</td>
+            </tr>
+            <tr>
+                <th>Adults</th>
+                <td>${rsvp.adults}</td>
+            </tr>
+            <tr>
+                <th>Children</th>
+                <td>${rsvp.children}</td>
+            </tr>
+            <tr>
+                <th>Transport</th>
+                <td>${rsvp.transport}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>${rsvp.message}</td>
+            </tr>
+        </table> 
+    </body>
+</html>                                                                                  

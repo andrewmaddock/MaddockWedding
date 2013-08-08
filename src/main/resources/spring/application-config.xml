@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- application repositories -->
+    <beans profile="gae">
+
+        <bean id="playListRepository" class="uk.co.andrewmaddock.wedding.repository.gae.PlayListRepositoryGae"/>
+
+        <bean id="rsvpRepository" class="uk.co.andrewmaddock.wedding.repository.gae.RsvpRepositoryGae"/>
+
+    </beans>
+    
+    <!-- application services -->
+    <beans profile="gae">
+        
+        <bean id="mailService" class="com.google.appengine.api.mail.MailServiceFactory" factory-method="getMailService"/>
+
+        <bean id="emailService" class="uk.co.andrewmaddock.wedding.service.email.AbstractEmailService" abstract="true">
+            <constructor-arg index="0" ref="mailerService"/>
+            <property name="sendToAdmins" value="true"/>
+        </bean>
+        
+        <bean id="playListEmailService" class="uk.co.andrewmaddock.wedding.service.email.gae.PlayListEmailServiceGae" parent="emailService">
+            <property name="templateLocation" value="email/playlist.vm"/>
+            <constructor-arg index="1" ref="velocityEngine"/>
+        </bean>
+        
+        <bean id="rsvpEmailService" class="uk.co.andrewmaddock.wedding.service.email.gae.RsvpEmailServiceGae" parent="emailService">
+            <property name="templateLocation" value="email/rsvp.vm"/>
+            <constructor-arg index="1" ref="velocityEngine"/>
+        </bean>
+        
+        <bean id="mailerService" class="uk.co.andrewmaddock.wedding.service.email.gae.MailerServiceGae">
+            <constructor-arg index="0" ref="mailService"/>  
+        </bean>
+        
+        <bean id="playListService" class="uk.co.andrewmaddock.wedding.service.gae.PlayListServiceGae">
+            <constructor-arg index="0" ref="playListRepository"/>
+            <constructor-arg index="1" ref="playListEmailService"/>
+        </bean>
+
+        <bean id="rsvpService" class="uk.co.andrewmaddock.wedding.service.gae.RsvpServiceGae">
+            <constructor-arg index="0" ref="rsvpRepository"/>
+            <constructor-arg index="1" ref="rsvpEmailService"/>
+        </bean>
+        
+    </beans>
+
+    <!-- application services -->
+    <beans>
+    
+        <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+            <property name="velocityProperties">
+                <value>
+                    resource.loader=class
+                    class.resource.loader.class=org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+                </value>
+            </property>
+        </bean>
+    
+    </beans>
+
+</beans>

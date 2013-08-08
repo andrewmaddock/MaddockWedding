@@ -1,0 +1,19 @@
+<html>
+    <body>
+        <h3>A new PlayList entry has be submitted:</h3>
+        <table>
+            <tr>
+                <th>Requester</th>
+                <td>${playList.requester}</td>
+            </tr>
+            <tr>
+                <th>Artist</th>
+                <td>${playList.artist}</td>
+            </tr>
+            <tr>
+                <th>Track</th>
+                <td>${playList.track}</td>
+            </tr>
+        </table> 
+    </body>
+</html>                                                                                  

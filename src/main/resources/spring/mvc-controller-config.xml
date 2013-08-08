@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- web controllers -->
+        
+    <beans profile="gae">
+        
+        <bean id="playListController" class="uk.co.andrewmaddock.wedding.mvc.controller.PlayListController">
+            <constructor-arg index="0" ref="playListService"/>
+        </bean>
+
+        <bean id="rsvpController" class="uk.co.andrewmaddock.wedding.mvc.controller.RsvpController">
+            <constructor-arg index="0" ref="rsvpService"/>
+        </bean>
+
+    </beans>    
+
+</beans>
