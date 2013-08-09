@@ -15,8 +15,8 @@
 
     <bean id="customizableTraceInterceptor" class="org.springframework.aop.interceptor.CustomizableTraceInterceptor">
         <property name="useDynamicLogger" value="true"/>
-        <property name="enterMessage" value="Entering $[targetClassName].$[methodName]($[arguments])"/>
-        <property name="exitMessage" value="Leaving $[targetClassName].$[methodName]()"/>
+        <property name="enterMessage" value="Entry $[targetClassName].$[methodName]($[arguments])"/>
+        <property name="exitMessage" value="Exit  $[targetClassName].$[methodName]()"/>
         <property name="exceptionMessage" value="$[methodName]: $[exception]"/>
     </bean>
     

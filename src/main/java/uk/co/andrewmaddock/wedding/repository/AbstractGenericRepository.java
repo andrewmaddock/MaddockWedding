@@ -2,9 +2,10 @@ package uk.co.andrewmaddock.wedding.repository;
 
 import org.springframework.dao.DataAccessException;
 
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyFactory;
+import com.googlecode.objectify.ObjectifyService;
 import uk.co.andrewmaddock.wedding.model.BaseEntity;
-
-import static uk.co.andrewmaddock.wedding.repository.gae.OfyService.ofy;
 
 /**
  * Generic repository for domain objects.
@@ -17,6 +18,22 @@ public class AbstractGenericRepository<T extends BaseEntity> implements GenericR
     @Override
     public void save(T domainObject) throws DataAccessException {
         ofy().save().entity(domainObject).now();
+    }
+
+    /**
+     * Returns current Objectify which lets you load, save, and delete typed entities.
+     * @return current Objectify
+     */
+    protected static Objectify ofy() {
+        return ObjectifyService.ofy();
+    }
+
+    /**
+     * Returns Objectify factory which allows construction of implementations of the Objectify interface.
+     * @return current Objectify factory
+     */
+    protected static ObjectifyFactory factory() {
+        return ObjectifyService.factory();
     }
     
 }

@@ -8,7 +8,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.core.style.ToStringCreator;
 
 import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.condition.IfNotZero;
 
@@ -19,13 +18,10 @@ import com.googlecode.objectify.condition.IfNotZero;
  *         Date: 17/07/13 11:59
  */
 @Entity 
-public class Rsvp implements BaseEntity {
+public class Rsvp extends AbstractBaseEntity {
 
     private static final long serialVersionUID = -5212436493939200125L;
 
-    @Id
-    private Long id;
-    
     @NotEmpty
     @Size(max = 500)
     private String names;
@@ -49,16 +45,6 @@ public class Rsvp implements BaseEntity {
     @Size(max = 500)
     private String message;
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-    
     public String getNames() {
         return names;
     }

@@ -6,7 +6,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 import com.google.appengine.api.utils.SystemProperty;
 
 /**
- * Custom context class to further reduce the loading time of an application by disabling XML validation in production.
+ * Context class to further reduce the loading time of an application by disabling XML validation in production.
  *
  * @author Andrew Maddock
  *         Date: 26/07/13 14:32

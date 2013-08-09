@@ -1,10 +1,13 @@
 package uk.co.andrewmaddock.wedding.mvc.controller;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -18,6 +21,10 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * PlayListController Test.
@@ -27,6 +34,11 @@ import static org.mockito.Mockito.when;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class PlayListControllerTest {
+
+    private static final String REQUESTER = "Requester";
+    private static final String ARTIST = "Artist";
+    private static final String TRACK = "Track";
+    private static final String WHY = "Why";
     
     @InjectMocks
     private final PlayListController controller = null;
@@ -47,8 +59,15 @@ public class PlayListControllerTest {
     private BindingResult result = null;    
     
     @Mock
-    private SessionStatus status = null;
+    private SessionStatus sessionStatus = null;
 
+    private MockMvc mockMvc = null;
+
+    @Before
+    public void setup() {
+        this.mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+    }
+    
     @Test
     public void setAllowedFieldsDisablesIdField() {
         controller.setAllowedFields(dataBinder);
@@ -68,7 +87,7 @@ public class PlayListControllerTest {
     public void addWithErrorsReturnsPlaylistView() {
         givenHasErrorsIs(true);
 
-        String view = controller.add(playList, result, status);
+        String view = controller.add(playList, result, sessionStatus);
 
         assertThat(view, is("playlist/playlist"));
     }
@@ -77,11 +96,11 @@ public class PlayListControllerTest {
     public void addWithoutErrorsCallsServiceAndSetStatusToCompleteAndReturnsRedirectToPlaylistConfirm() {
         givenHasErrorsIs(false);
 
-        String view = controller.add(playList, result, status);
+        String view = controller.add(playList, result, sessionStatus);
 
         verify(service).save(playList);
         verify(service).email(playList);
-        verify(status).setComplete();
+        verify(sessionStatus).setComplete();
         assertThat(view, is("redirect:/playlist/confirm"));
     }
 
@@ -99,8 +118,62 @@ public class PlayListControllerTest {
         assertThat(view, is("playlist/playlistView"));
     }
 
+    @Test
+    public void mvcInit() throws Exception {
+        mockMvc.perform(
+                get("/playlist"))
+                    .andExpect(status().isOk())
+                    .andExpect(model().size(1))
+                    .andExpect(model().attributeExists("playList"))
+                    .andExpect(view().name("playlist/playlist"));
+    }
+
+    @Test
+    public void mvcAddConfirm() throws Exception {
+        PlayList sessionPlayList = givenPlayListIs(REQUESTER, ARTIST, TRACK, WHY);
+        
+        mockMvc.perform(
+                post("/playlist")
+                    .sessionAttr("playList", sessionPlayList))
+                .andDo(print())
+                .andExpect(status().isMovedTemporarily())
+                .andExpect(model().hasNoErrors())
+                .andExpect(redirectedUrl("/playlist/confirm"));
+        
+        verify(service).save(sessionPlayList);
+        verify(service).email(sessionPlayList);
+    }
+
+    @Test
+    public void mvcAddErrors() throws Exception {
+        mockMvc.perform(
+                post("/playlist")
+                    .sessionAttr("playList", new PlayList()))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(model().hasErrors())
+                .andExpect(view().name("playlist/playlist"));
+    }
+
+    @Test
+    public void mvcConfirm() throws Exception {
+        mockMvc.perform(get("/playlist/confirm"))
+                .andExpect(status().isOk())
+                .andExpect(model().size(0))
+                .andExpect(view().name("playlist/playlistConfirm"));
+    }
+
     private void givenHasErrorsIs(boolean errors) {
         when(result.hasErrors()).thenReturn(errors);
+    }
+
+    private PlayList givenPlayListIs(String requester, String artist, String track, String why) {
+        PlayList p = new PlayList(); 
+        p.setRequester(requester);
+        p.setArtist(artist);
+        p.setTrack(track);
+        p.setWhy(why);
+        return p;
     }
 
 }

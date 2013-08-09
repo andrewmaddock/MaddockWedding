@@ -15,7 +15,12 @@
     </system-properties>
 
     <resource-files>
+        <include path="/resources/css/**.css" />
+        <include path="/resources/js/**.js" />
         <include path="/resources/images/favicon.ico" />
+        <include path="/resources/images/**.jpg" />
+        <include path="/resources/images/**.jpeg" />
+        <include path="/resources/images/**.png" />
     </resource-files>
     
 </appengine-web-app>

@@ -13,10 +13,10 @@ import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestC
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import uk.co.andrewmaddock.wedding.model.Rsvp;
 
+import static com.googlecode.objectify.ObjectifyService.ofy;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
-import static uk.co.andrewmaddock.wedding.repository.gae.OfyService.ofy;
 
 /**
  * RsvpRepositoryGae Test.
@@ -25,7 +25,7 @@ import static uk.co.andrewmaddock.wedding.repository.gae.OfyService.ofy;
  *         Date: 05/08/13 14:03
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration( "classpath:spring/application-config.xml" )
+@ContextConfiguration( { "classpath:spring/application-config.xml", "classpath:spring/datasource-config.xml", })
 @ActiveProfiles("gae")
 public class RsvpRepositoryGaeTest {
 

@@ -20,8 +20,6 @@ import static org.apache.commons.lang.StringUtils.isBlank;
  */
 public abstract class AbstractEmailService<T extends BaseEntity> implements EmailService<T> {
 
-//    protected static final Logger LOG = LoggerFactory.getLogger(AbstractEmailService.class.getName());
-
     private static final String ENCODING = "UTF-8";
     
     private final MailerService mailerService;

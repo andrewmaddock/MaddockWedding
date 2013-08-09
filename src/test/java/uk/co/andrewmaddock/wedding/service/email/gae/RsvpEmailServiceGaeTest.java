@@ -57,7 +57,7 @@ public class RsvpEmailServiceGaeTest {
 
     @Before
     public void setUp() {
-        givenPlayListIs(NAMES, ATTENDING, ADULTS, CHILDREN, TRANSPORT, MESSAGE);
+        givenRsvpIs(NAMES, ATTENDING, ADULTS, CHILDREN, TRANSPORT, MESSAGE);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class RsvpEmailServiceGaeTest {
         assertThat(emailBody, is(expectedEmailBodyIs()));
     }
 
-    private void givenPlayListIs(String names, boolean attending, int adults, int children, boolean transport, String message) {
+    private void givenRsvpIs(String names, boolean attending, int adults, int children, boolean transport, String message) {
         when(rsvp.getNames()).thenReturn(names);
         when(rsvp.isAttending()).thenReturn(attending);
         when(rsvp.getAdults()).thenReturn(adults);
